@@ -1,0 +1,627 @@
+:root {
+  --main-color: #d6a553;
+  --secondary-color: #0d4715;
+  --black: #13131a;
+  --bg: #eaeade;
+}
+body,
+html {
+  height: 100%;
+}
+
+.alert {
+  margin-top: 10px;
+}
+
+body {
+  background-color: #eaeade;
+  box-sizing: border-box;
+  overflow-x: hidden;
+}
+
+li {
+  list-style-type: none;
+}
+a {
+  text-decoration: none;
+  background-color: transparent;
+}
+
+.line-heart {
+  width: 200px;
+  height: auto;
+}
+
+/* ==========================
+   Google Fonts Styling
+========================== */
+.header-title {
+  font-family: "Parisienne", cursive;
+  font-size: 80px;
+  color: white;
+  margin-bottom: 20px;
+}
+
+.header-subtitle {
+  font-family: "Montserrat", sans-serif;
+  font-size: 25px;
+  color: white;
+  margin-bottom: 10px;
+}
+
+.margin-top-down {
+  margin: 150px 0;
+}
+
+/* ==========================
+   Carousel Styling
+========================== */
+.carousel-item {
+  position: relative;
+  height: 100vh; /* Full screen height */
+  background-size: cover;
+  background-position: center;
+  transition: transform 1.5s ease-in-out; /* Smooth slow transition */
+}
+
+.carousel-item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* Ensures image covers the area */
+}
+
+/* Dark Overlay */
+.carousel-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.6); /* Dark effect */
+  color: white;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: 20px;
+}
+
+/* ==========================
+   Carousel Indicators
+========================== */
+.carousel-indicators button {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background-color: white;
+  opacity: 0.5;
+  transition: opacity 0.3s ease-in-out;
+}
+
+.carousel-indicators .active {
+  opacity: 1;
+  background-color: white;
+}
+
+/* ==========================
+   Transparent Button Styling
+========================== */
+.btn-transparent {
+  font-family: "Montserrat", sans-serif;
+  background: transparent;
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  font-weight: 600;
+  color: white; /* Default text color */
+  text-decoration: none;
+  border: 2px solid white; /* White border */
+  border-radius: 25px; /* Rounded corners */
+  padding: 10px 30px;
+  overflow: hidden;
+  cursor: pointer;
+  transition: color 0.3s ease-out, border 0.3s ease-out;
+  z-index: 1;
+}
+
+/* Button Inner Span */
+.btn-transparent span {
+  z-index: 2; /* Keep text above the background */
+}
+
+/* Hover Background Effect */
+.btn-transparent::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 20em;
+  height: 20em;
+  border-radius: 50%;
+  background: #d6a553; /* Background color on hover */
+  z-index: 0;
+  transition: box-shadow 0.5s ease-out, transform 0.5s ease-out;
+  transform: translate(-50%, -50%) scale(0);
+}
+
+/* Hover Effects */
+.btn-transparent:hover {
+  color: #fff; /* Text changes to black */
+  border: 2px solid #fff; /* Maintain border color */
+}
+
+.btn-transparent:hover::before {
+  box-shadow: inset 0 0 0 10em #d6a553; /* Background expands */
+  transform: translate(-50%, -50%) scale(1); /* Expand smoothly */
+}
+
+/* Navbar Section */
+.navbar-brand,
+.nav-link {
+  color: #fff;
+}
+
+.navbar-nav .nav-link.active {
+  color: var(--main-color) !important;
+}
+
+.navbar-nav .nav-link:hover {
+  color: var(--main-color);
+}
+
+.navbar-brand {
+  font-family: "Great Vibes", cursive;
+  font-size: 2rem;
+  letter-spacing: 2px;
+}
+
+.navbar-brand:hover {
+  color: #d6a553;
+}
+
+.navbar-light .navbar-toggler {
+  border-color: #d6a553; /* Sets the border color */
+}
+
+.navbar-light .navbar-toggler-icon {
+  background-image: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 30 30' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='%23d6a553' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 7h22M4 15h22M4 23h22'/%3E%3C/svg%3E");
+}
+
+/* ==========================
+   About Section Section
+========================== */
+
+.text-header {
+  font-family: "Great Vibes", cursive;
+  font-size: 80px;
+  color: var(--secondary-color);
+  margin: 0 20px;
+}
+
+.text-subheader {
+  font-family: "Great Vibes", cursive;
+  font-size: 40px;
+  color: var(--main-color);
+}
+
+.text-header-about {
+  margin-top: 100px;
+  font-family: "Great Vibes", cursive;
+  font-size: 80px;
+  color: var(--secondary-color);
+}
+
+.fb-logo {
+  background-color: #3b5998;
+  color: #fff;
+  border: none;
+}
+
+.fb-logo:hover {
+  background-color: #2d4373;
+  color: #fff;
+}
+
+/* ==========================
+   Our Story Section 
+========================== */
+
+/* ==================================================== */
+
+#story-timeline {
+  background-color: #fff;
+}
+
+#story-timeline .bi-hearts {
+  color: #f7374f;
+}
+
+#story-timeline p {
+  font-size: 1.5rem;
+  line-height: 1.6 !important;
+  letter-spacing: 0.8px;
+}
+
+/* ==========================
+   Countdown Section
+========================== */
+#countdown span {
+  text-align: center !important;
+}
+
+#countdown-section {
+  background-image: url("../../assets/images/whitedirty_bg.png");
+  background-size: cover;
+  background-position: center;
+}
+
+#countdown-section .text-subheader {
+  margin-top: 30px;
+  font-family: "Montserrat", sans-serif;
+  color: var(--secondary-color);
+  font-size: 1.2rem;
+  line-height: 1.5;
+  letter-spacing: 0.8px;
+}
+
+#countdown-section .text-days {
+  /* font-family: "Montserrat", sans-serif; */
+  color: var(--main-color);
+  font-size: 4rem;
+  text-align: center;
+}
+
+.text-name {
+  font-family: "Montserrat", sans-serif;
+  color: var(--main-color);
+  font-weight: bold;
+}
+
+.text-dark span {
+  font-family: "Montserrat", sans-serif;
+  color: var(--secondary-color);
+  font-size: 30px;
+}
+
+.image-section {
+  height: 400px;
+  overflow: hidden;
+  position: relative;
+}
+
+.image-section img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center; /* Use 'top' or 'bottom' if preferred */
+}
+
+.dark-overlay {
+  background-color: rgba(0, 0, 0, 0.4);
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+}
+
+.text-days.animate {
+  display: inline-block;
+  transition: transform 0.5s ease, opacity 0.5s ease;
+}
+
+.text-days.animate:hover {
+  transform: scale(1.05);
+}
+
+.text-days.animate {
+  animation: fadeInUp 0.5s ease;
+}
+
+@keyframes fadeInUp {
+  0% {
+    transform: translateY(10px);
+    opacity: 0.3;
+  }
+  100% {
+    transform: translateY(0px);
+    opacity: 1;
+  }
+}
+
+/* Gallery Section */
+
+.gallery-swiper {
+  padding: 40px 0; /* top-bottom padding for spacing */
+}
+
+.gallery-img {
+  width: 800px;
+  height: 400px;
+  object-fit: cover;
+  border-radius: 1%;
+  transition: transform 0.2s ease, opacity 0.2s ease;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+}
+
+.swiper-slide {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 600px !important; /* control width of each slide */
+}
+
+.swiper-slide:not(.swiper-slide-active) .gallery-img {
+  opacity: 0.3;
+  transform: scale(0.85);
+}
+
+.gallery-section {
+  margin: 100px 0;
+}
+
+/* Image Grid */
+.memory {
+  margin-bottom: 20px;
+  cursor: pointer;
+}
+
+.memories-img img {
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+  border-radius: 12px;
+  transition: transform 0.2s ease-in-out;
+}
+
+.memories-img img:hover {
+  transform: scale(1.02);
+}
+
+/* Modal Styles */
+.modal-body {
+  position: relative;
+  background-color: transparent;
+  padding: 0;
+}
+
+.modal-content {
+  background: transparent;
+  border: none;
+  box-shadow: none;
+}
+
+#modalImage {
+  max-width: 100%;
+  height: auto;
+  border-radius: 15px;
+  box-shadow: 0 5px 25px rgba(0, 0, 0, 0.3);
+}
+
+.btn-close {
+  position: absolute;
+  top: 10px;
+  right: 15px;
+  z-index: 1051;
+  border-radius: 50%;
+  padding: 5px;
+}
+
+.modal-body button.btn {
+  background: rgba(0, 0, 0, 0.5);
+  border: none;
+  font-size: 1.5rem;
+  color: #fff;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: background 0.3s ease-in-out;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.modal-body button.btn:hover {
+  background: rgba(0, 0, 0, 0.8);
+}
+
+.btn-close {
+  width: 1.5rem;
+  height: 1.5rem;
+}
+
+/* Responsive Image Aspect */
+.landscape-img {
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+  cursor: pointer;
+}
+
+/* Modal Backdrop (Optional style) */
+.modal-backdrop.show {
+  opacity: 0.95;
+  background-color: rgba(0, 0, 0, 0.9);
+}
+
+/* Wedding Events */
+.card-top {
+  border-bottom: 1px solid #d6a553;
+  width: 80%; /* adjust as needed */
+  margin: 0 auto;
+  padding-bottom: 5px;
+  text-align: center;
+}
+
+.card-body li {
+  margin-bottom: 10px;
+  text-align: center;
+  color: var(--secondary-color);
+}
+
+.card {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* default subtle shadow */
+}
+
+.card:hover {
+  transform: translateY(-8px);
+}
+
+.card-body ul li {
+  margin-bottom: 0.75rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  justify-content: center;
+  transition: color 0.3s ease;
+}
+
+.dashboard-container .card,
+.dashboard-container .table-responsive {
+  width: 100% !important;
+  max-width: 100% !important;
+}
+
+#entrourage-section {
+  background-image: url("/images/whitedirty_bg.png");
+  background-size: cover;
+  background-position: center;
+}
+
+.entourage-text-title {
+  font-family: "Great Vibes", sans-serif;
+  font-size: 2.8rem;
+  letter-spacing: 0.3rem;
+  font-weight: bold;
+  color: var(--main-color);
+}
+
+.entourage-text-subtitle {
+  font-family: "Montserrat", sans-serif;
+  font-size: 1.3rem;
+  font-weight: bold;
+  color: var(--main-color);
+}
+
+.entourage-text-name {
+  font-family: "Montserrat", sans-serif;
+  color: var(--secondary-color);
+  font-size: 1.2rem;
+}
+
+/* Dress to Celebrate */
+.color-swatch {
+  width: 45px;
+  height: 45px;
+  border-radius: 50%;
+  margin: 5px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.dress-section {
+  padding: 100px;
+  background-color: #fff;
+}
+
+.outfit-image {
+  max-width: 300px;
+  height: auto;
+}
+
+@media (max-width: 768px) {
+  .dress-section {
+    padding: 60px 20px;
+  }
+}
+
+/* RSVP Section */
+/* Wedding RSVP/Join the Celebration */
+
+#weddingRsvp {
+  background-color: #fff;
+}
+
+#weddingRsvp .text-subheader {
+  font-family: "Montserrat", sans-serif;
+  color: var(--main-color);
+  font-size: 1rem;
+}
+
+#weddingRsvp .text-header-rsvp {
+  font-family: "Montserrat", sans-serif;
+  color: var(--main-color);
+  font-size: 1.5rem;
+}
+
+/* scroll-button */
+.scroll-btn {
+  position: fixed;
+  bottom: 40px;
+  right: 40px;
+  width: 50px;
+  height: 50px;
+  background-color: var(--main-color);
+  border: none;
+  border-radius: 50%;
+  cursor: pointer;
+  z-index: 9999;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.scroll-btn::before {
+  content: "";
+  display: inline-block;
+  width: 0.6em;
+  height: 0.6em;
+  border-left: 3px solid #fff;
+  border-bottom: 3px solid #fff;
+  transform: rotate(135deg); /* Upward arrow */
+  margin-top: 8px;
+}
+
+/* Footer Section */
+
+#footer-section {
+  background-color: #232429;
+}
+
+#footer-section span {
+  color: var(--main-color);
+}
+
+#footer-section a:hover {
+  color: var(--main-color);
+}
+
+#footer-section .wedding-login:hover {
+  color: var(--main-color);
+}
+
+#footer-section span:hover {
+  color: var(--bg);
+}
+
+#footer-section .the-wedding {
+  color: var(--main-color);
+}
+
+#footer-section .the-wedding:hover {
+  color: var(--bg);
+}
+
+/* Dashboard Section */
+.dashboard-table-container {
+  width: 100%;
+  overflow-x: auto;
+}
+
+.dashboard-table-container table {
+  min-width: 1200px; /* Adjust this value if your table still feels cramped */
+  table-layout: auto;
+}
