@@ -40,7 +40,7 @@ const RsvpSection = () => {
       };
 
       const res = await axios.post(
-        "http://localhost:5050/api/guests",
+        "https://wedding-backend-8y85.onrender.com/api/guests",
         guestData
       );
 
