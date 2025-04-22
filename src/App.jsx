@@ -5,7 +5,7 @@ import Header from "./components/Header";
 import Navbar from "./components/Navbar";
 import AboutSection from "./components/AboutSection";
 import StorySection from "./components/StorySection";
-import CountdownSection from "./components/CountdownSection";
+import CountDownSection from "./components/CountDownSection";
 import WeddingEventsSection from "./components/WeddingEventsSection";
 import ImageBgSection from "./components/ImageBgSection";
 import EntourageSection from "./components/EntourageSection";
@@ -39,7 +39,7 @@ function App() {
               <Navbar />
               <AboutSection />
               <StorySection />
-              <CountdownSection />
+              <CountDownSection />
               <WeddingEventsSection />
               <ImageBgSection />
               <EntourageSection />
