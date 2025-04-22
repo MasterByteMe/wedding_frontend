@@ -1,15 +1,13 @@
 import axios from "axios";
 
 const API = axios.create({
-  baseURL: "http://localhost:5050/api", // Render will be used later for production
+  baseURL: "https://wedding-backend-8y85.onrender.com/api",
 });
 
-// Attach JWT token to every request if present
+// Optional: attach token automatically for protected routes
 API.interceptors.request.use((config) => {
-  const token = localStorage.getItem("token"); // Assumes token is saved on login
-  if (token) {
-    config.headers.Authorization = `Bearer ${token}`;
-  }
+  const token = localStorage.getItem("token");
+  if (token) config.headers.Authorization = `Bearer ${token}`;
   return config;
 });
 
