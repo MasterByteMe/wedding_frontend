@@ -692,31 +692,6 @@ a {
     margin-top: 20px;
   }
 
-  /* RSVP Section Adjustments */
-  #weddingRsvp .text-header {
-    font-size: 2.5rem;
-    padding-bottom: 1.5rem;
-    margin-bottom: 1rem;
-  }
-
-  #weddingRsvp .text-subheader {
-    font-size: 0.9rem;
-  }
-
-  .RSVP-form form .row {
-    margin: 0;
-  }
-
-  .RSVP-form .form-floating {
-    margin-bottom: 1rem;
-  }
-
-  .RSVP-form .position-absolute {
-    max-width: 90%;
-    left: 5% !important;
-    transform: none !important;
-  }
-
   /* Scroll Button Fix */
   .scroll-btn {
     bottom: 20px;
