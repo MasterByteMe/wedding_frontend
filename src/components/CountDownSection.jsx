@@ -90,7 +90,7 @@ const CountdownSection = () => {
       </div>
 
       {/* Countdown Section */}
-      <div className="container position-relative">
+      <div className="container position-relative pt-4">
         <div
           className="mx-auto text-center mb-5"
           data-aos="fade-up"
