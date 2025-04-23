@@ -655,19 +655,37 @@ a {
 /* ==========================
    Responsive adjustments
 ========================== */
+
 @media (max-width: 576px) {
   html,
   body {
-    overflow-x: hidden; /* Prevents any horizontal scroll */
+    overflow-x: hidden;
+  }
+
+  body {
+    padding: 0;
+    margin: 0;
+  }
+
+  .container,
+  .container-fluid {
+    padding-left: 1rem;
+    padding-right: 1rem;
+    overflow-x: hidden;
   }
 
   .text-header {
-    font-size: 40px;
-    margin-left: 30px;
-    margin-right: 30px;
+    font-size: 2.5rem;
+    margin: 0 1rem;
+    padding-bottom: 1.5rem;
   }
 
-  /* Countdown adjustments */
+  .text-subheader {
+    font-size: 1.25rem;
+    text-align: center;
+  }
+
+  /* Countdown Section */
   #countdown {
     flex-wrap: wrap;
     justify-content: center;
@@ -676,7 +694,7 @@ a {
   }
 
   #countdown > div {
-    flex: 1 1 40%;
+    flex: 1 1 45%;
     margin-right: 0 !important;
     text-align: center;
   }
@@ -688,15 +706,40 @@ a {
   #countdown-section .text-subheader {
     font-size: 1rem;
     line-height: 1.4;
+    margin-top: 20px;
   }
 
-  /* Scroll button mobile styles */
+  /* RSVP Section Adjustments */
+  #weddingRsvp .text-header {
+    font-size: 2.5rem;
+    padding-bottom: 1.5rem;
+    margin-bottom: 1rem;
+  }
+
+  #weddingRsvp .text-subheader {
+    font-size: 0.9rem;
+  }
+
+  .RSVP-form form .row {
+    margin: 0;
+  }
+
+  .RSVP-form .form-floating {
+    margin-bottom: 1rem;
+  }
+
+  .RSVP-form .position-absolute {
+    max-width: 90%;
+    left: 5% !important;
+    transform: none !important;
+  }
+
+  /* Scroll Button Fix */
   .scroll-btn {
     bottom: 20px;
     right: 10px;
     width: 40px;
     height: 40px;
-    max-width: 100%;
   }
 
   .scroll-btn::before {
@@ -707,14 +750,19 @@ a {
     margin-top: 6px;
   }
 
-  /* RSVP section adjustments */
-  #weddingRsvp .text-header {
-    font-size: 2.5rem;
-    padding-bottom: 1.5rem;
-    margin-bottom: 1rem;
+  /* Footer Section Adjustments */
+  #footer-section {
+    text-align: center;
+    padding: 1rem;
   }
 
-  #weddingRsvp .text-subheader {
-    font-size: 0.9rem;
+  /* Gallery fix for narrow screens */
+  .gallery-img {
+    width: 100%;
+    height: auto;
+  }
+
+  .swiper-slide {
+    width: 100% !important;
   }
 }
