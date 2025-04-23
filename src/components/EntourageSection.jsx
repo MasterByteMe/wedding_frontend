@@ -34,11 +34,11 @@ const EntourageSection = () => {
       <div className="container position-relative pt-5">
         {/* Title */}
         <div
-          className="text-center mb-5"
+          className="mx-auto text-center mb-5"
           data-aos="fade-up"
           data-aos-delay="100"
         >
-          <h1 className="text-header text-center">Meet the Entourage</h1>
+          <h1 className="text-header text-center px-5">Meet the Entourage</h1>
           <img
             src={lineHeart}
             alt="Line Heart"

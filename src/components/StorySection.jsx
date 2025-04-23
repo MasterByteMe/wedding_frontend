@@ -45,7 +45,9 @@ const StorySection = () => {
           data-aos="fade-up"
           data-aos-delay="100"
         >
-          <h1 className="text-header px-3">Our Love Story</h1>
+          <div className="mx-auto text-center mb-5" data-aos="fade-up">
+            <h1 className="text-header px-5">Our Love Story</h1>
+          </div>
           <img
             src={lineHeart}
             alt="Line Heart"

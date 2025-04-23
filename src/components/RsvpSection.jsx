@@ -106,7 +106,7 @@ const RsvpSection = () => {
               style={{ borderStyle: "double" }}
             >
               <div
-                className="fw-bold text-subheader bg-white d-flex align-items-center justify-content-center position-absolute border-success pt-4"
+                className="fw-bold text-subheader bg-white d-flex align-items-center justify-content-center position-absolute border-success p-2"
                 style={{
                   width: "75%",
                   borderStyle: "double",
