@@ -534,12 +534,6 @@ a {
   height: auto;
 }
 
-@media (max-width: 768px) {
-  .dress-section {
-    padding: 60px 20px;
-  }
-}
-
 /* RSVP Section */
 /* Wedding RSVP/Join the Celebration */
 
@@ -624,4 +618,63 @@ a {
 .dashboard-table-container table {
   min-width: 1200px; /* Adjust this value if your table still feels cramped */
   table-layout: auto;
+}
+
+/* BreakPoint */
+
+@media (max-width: 768px) {
+  .dress-section {
+    padding: 60px 20px;
+  }
+}
+
+/* Responsive adjustment for mobile screens */
+@media (max-width: 576px) {
+  .text-header {
+    font-size: 40px;
+    margin: 0 10px;
+  }
+
+  /* CountDown Section */
+  #countdown {
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 1rem;
+    padding: 0 1rem;
+  }
+  #countdown > div {
+    flex: 1 1 40%;
+    text-align: center;
+    margin-right: 0 !important;
+  }
+
+  #countdown-section .text-days {
+    font-size: 2.2rem;
+  }
+
+  #countdown-section .text-subheader {
+    font-size: 1rem;
+    line-height: 1.4;
+  }
+
+  .text-header {
+    font-size: 40px;
+    margin: 0 10px;
+  }
+
+  /* ScrollButton Section */
+  .scroll-btn {
+    bottom: 20px;
+    right: 20px;
+    width: 40px;
+    height: 40px;
+  }
+
+  .scroll-btn::before {
+    width: 0.5em;
+    height: 0.5em;
+    border-left: 2px solid #fff;
+    border-bottom: 2px solid #fff;
+    margin-top: 6px;
+  }
 }

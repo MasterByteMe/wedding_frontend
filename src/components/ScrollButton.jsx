@@ -25,6 +25,7 @@ const ScrollToTopButton = () => {
       id="scrollBtn"
       className="scroll-btn"
       aria-label="Back to Top"
+      title="Back to Top"
       onClick={scrollToTop}
       style={{ display: isVisible ? "inline-block" : "none" }}
     />

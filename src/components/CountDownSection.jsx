@@ -26,7 +26,7 @@ const CountdownSection = () => {
   });
 
   useEffect(() => {
-    const targetDate = new Date("April 26, 2025 00:00:00").getTime();
+    const targetDate = new Date("April 26, 2025 10:00:00").getTime();
 
     const updateCountdown = () => {
       const now = new Date().getTime();
@@ -111,20 +111,24 @@ const CountdownSection = () => {
           data-aos="fade-up"
           data-aos-delay="200"
         >
-          <div className="fs-2 me-5">
+          <div className="fs-2">
             <div className="text-days animate">{timeLeft.days}</div>
+            <br />
             <span>Days</span>
           </div>
-          <div className="fs-2 me-5">
+          <div className="fs-2">
             <div className="text-days animate">{timeLeft.hours}</div>
+            <br />
             <span>Hours</span>
           </div>
-          <div className="fs-2 me-5">
+          <div className="fs-2">
             <div className="text-days animate">{timeLeft.minutes}</div>
+            <br />
             <span>Mins</span>
           </div>
           <div className="fs-2 me-0">
             <div className="text-days animate">{timeLeft.seconds}</div>
+            <br />
             <span>Secs</span>
           </div>
         </div>
