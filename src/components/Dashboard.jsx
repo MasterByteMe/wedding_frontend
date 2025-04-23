@@ -86,7 +86,7 @@ const Dashboard = () => {
                     <thead className="table-dark">
                       <tr>
                         <th>#</th>
-                        <th>ID</th>
+
                         <th>Name</th>
                         <th>Mobile</th>
                         <th>Email</th>
@@ -99,7 +99,7 @@ const Dashboard = () => {
                       {guests.map((guest, index) => (
                         <tr key={guest._id}>
                           <td>{index + 1}</td>
-                          <td>{guest._id.slice(-6)}</td>
+
                           <td>{`${guest.firstname} ${guest.lastname}`}</td>
                           <td>{guest.mobile || "N/A"}</td>
                           <td>{guest.email}</td>
