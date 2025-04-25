@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react"; // <-- Make sure useEffect is imported
+import React, { useState, useEffect } from "react"; // <-- Import useEffect correctly
 import axios from "axios";
 
 import flowerLeft from "../assets/images/gold_flower1.png";
@@ -16,16 +16,6 @@ const RsvpSection = () => {
 
   const [successMessage, setSuccessMessage] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
-
-  // useEffect to show the modal when either successMessage or errorMessage changes
-  useEffect(() => {
-    if (successMessage || errorMessage) {
-      const modal = new window.bootstrap.Modal(
-        document.getElementById("messageModal")
-      );
-      modal.show();
-    }
-  }, [successMessage, errorMessage]);
 
   const handleChange = (e) => {
     const { id, value } = e.target;
@@ -56,7 +46,7 @@ const RsvpSection = () => {
 
       if (res.status === 201 || res.status === 200) {
         setSuccessMessage("RSVP submitted successfully! 🎉");
-        setErrorMessage("");
+        setErrorMessage(""); // clear any previous error messages
         setFormData({
           firstname: "",
           lastname: "",
@@ -78,10 +68,19 @@ const RsvpSection = () => {
         setErrorMessage("Oops! Failed to submit RSVP.");
       }
 
-      setSuccessMessage("");
+      setSuccessMessage(""); // clear any previous success messages
       console.error("RSVP Error:", error);
     }
   };
+
+  useEffect(() => {
+    if (successMessage || errorMessage) {
+      const modal = new window.bootstrap.Modal(
+        document.getElementById("messageModal")
+      );
+      modal.show(); // Show modal on successful submission or error
+    }
+  }, [successMessage, errorMessage]);
 
   return (
     <section
@@ -125,18 +124,169 @@ const RsvpSection = () => {
             >
               <form onSubmit={handleSubmit}>
                 <div className="row gx-4 gy-3">
-                  {/* Form Fields (same as before) */}
-                  {/* ... */}
-                </div>
+                  {/* First Name */}
+                  <div className="col-lg-6">
+                    <div className="form-floating mb-2 mt-3">
+                      <input
+                        type="text"
+                        className="form-control"
+                        id="firstname"
+                        value={formData.firstname}
+                        onChange={handleChange}
+                        placeholder="First Name"
+                        required
+                      />
+                      <label htmlFor="firstname" className="text-dark">
+                        First Name
+                      </label>
+                    </div>
+                  </div>
 
-                {/* Submit Button */}
-                <div className="col-12 text-center">
-                  <button
-                    type="submit"
-                    className="btn btn-outline-warning text-dark py-3 px-5"
-                  >
-                    Submit Now
-                  </button>
+                  {/* Last Name */}
+                  <div className="col-lg-6">
+                    <div className="form-floating mb-2 mt-3">
+                      <input
+                        type="text"
+                        className="form-control"
+                        id="lastname"
+                        value={formData.lastname}
+                        onChange={handleChange}
+                        placeholder="Last Name"
+                        required
+                      />
+                      <label htmlFor="lastname" className="text-dark">
+                        Last Name
+                      </label>
+                    </div>
+                  </div>
+
+                  {/* Email */}
+                  <div className="col-lg-6">
+                    <div className="form-floating mb-2 mt-3">
+                      <input
+                        type="email"
+                        className="form-control"
+                        id="email"
+                        value={formData.email}
+                        onChange={handleChange}
+                        placeholder="Email"
+                        required
+                      />
+                      <label htmlFor="email" className="text-dark">
+                        Enter Your Email
+                      </label>
+                    </div>
+                  </div>
+
+                  {/* Mobile */}
+                  <div className="col-lg-6">
+                    <div className="form-floating mb-2 mt-3">
+                      <input
+                        type="tel"
+                        className="form-control"
+                        id="mobile"
+                        value={formData.mobile}
+                        onChange={handleChange}
+                        placeholder="Mobile"
+                        required
+                      />
+                      <label htmlFor="mobile" className="text-dark">
+                        Enter Your Mobile No.
+                      </label>
+                    </div>
+                  </div>
+
+                  {/* Message */}
+                  <div className="col-12">
+                    <div className="form-floating">
+                      <textarea
+                        className="form-control"
+                        id="message"
+                        rows="5"
+                        value={formData.message}
+                        onChange={handleChange}
+                        placeholder="Message"
+                      ></textarea>
+                      <label htmlFor="message" className="text-dark">
+                        Message
+                      </label>
+                    </div>
+                  </div>
+
+                  {/* Attendance Radio Buttons */}
+                  <div className="col-12">
+                    <div className="text-center border border-success p-4 my-4 position-relative">
+                      <div
+                        className="fw-bold text-subheader bg-white d-flex align-items-center justify-content-center position-absolute border-success p-2"
+                        style={{
+                          width: "50%",
+                          borderStyle: "double",
+                          top: 0,
+                          left: "50%",
+                          transform: "translate(-50%, -50%)",
+                        }}
+                      >
+                        Will you be attending?
+                      </div>
+
+                      <div className="mt-4 row g-4 justify-content-center">
+                        <div className="col-lg-6">
+                          <div className="form-check d-flex justify-content-center align-items-center">
+                            <input
+                              className="form-check-input me-2"
+                              type="radio"
+                              name="attendance"
+                              id="attending_yes"
+                              value="Accept With Pleasure!"
+                              checked={
+                                formData.rsvp_status === "Accept With Pleasure!"
+                              }
+                              onChange={handleRadioChange}
+                              required
+                            />
+                            <label
+                              className="form-check-label"
+                              htmlFor="attending_yes"
+                            >
+                              Accept With Pleasure!
+                            </label>
+                          </div>
+                        </div>
+                        <div className="col-lg-6">
+                          <div className="form-check d-flex justify-content-center align-items-center">
+                            <input
+                              className="form-check-input me-2"
+                              type="radio"
+                              name="attendance"
+                              id="attending_no"
+                              value="Decline With Regret"
+                              checked={
+                                formData.rsvp_status === "Decline With Regret"
+                              }
+                              onChange={handleRadioChange}
+                              required
+                            />
+                            <label
+                              className="form-check-label"
+                              htmlFor="attending_no"
+                            >
+                              Decline With Regret
+                            </label>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Submit Button */}
+                  <div className="col-12 text-center">
+                    <button
+                      type="submit"
+                      className="btn btn-outline-warning text-dark py-3 px-5"
+                    >
+                      Submit Now
+                    </button>
+                  </div>
                 </div>
               </form>
             </div>
