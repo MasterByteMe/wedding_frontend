@@ -14,9 +14,9 @@ const RsvpSection = () => {
     rsvp_status: "",
   });
 
-  const [successMessage, setSuccessMessage] = useState("");
-  const [errorMessage, setErrorMessage] = useState("");
-  const [showModal, setShowModal] = useState(false); // <-- NEW
+  const [modalMessage, setModalMessage] = useState(""); // Modal message state
+  const [modalTitle, setModalTitle] = useState(""); // Modal title state
+  const [showModal, setShowModal] = useState(false); // Modal visibility state
 
   const handleChange = (e) => {
     const { id, value } = e.target;
@@ -46,9 +46,11 @@ const RsvpSection = () => {
       );
 
       if (res.status === 201 || res.status === 200) {
-        setSuccessMessage("RSVP submitted successfully! 🎉");
-        setErrorMessage("");
-        setShowModal(true);
+        // Success response
+        setModalTitle("Success");
+        setModalMessage(
+          "Thank you for your RSVP! 🎉 We look forward to celebrating with you!"
+        );
         setFormData({
           firstname: "",
           lastname: "",
@@ -58,23 +60,45 @@ const RsvpSection = () => {
           rsvp_status: "",
         });
       } else {
-        throw new Error("Submission failed");
+        throw new Error("Unexpected response");
       }
     } catch (error) {
-      if (
-        error.response &&
-        error.response.data &&
-        error.response.data.message &&
-        error.response.data.message.includes("already")
-      ) {
-        setErrorMessage("Email already used or RSVP already submitted.");
+      if (error.response) {
+        const backendMessage = error.response.data.message;
+        const statusCode = error.response.status;
+
+        // Handling different status codes
+        if (statusCode === 409) {
+          // Email already used (Conflict)
+          setModalTitle("Oops, an issue occurred");
+          setModalMessage(
+            "It seems that this email address has already been used to RSVP. Please try a different email."
+          );
+        } else if (statusCode === 400) {
+          // Missing fields (Bad Request)
+          setModalTitle("Oops, we need more info");
+          setModalMessage(
+            "Please make sure all required fields (first name, last name, email, and RSVP status) are filled out."
+          );
+        } else if (statusCode === 500) {
+          // Server error (Internal Server Error)
+          setModalTitle("Something went wrong");
+          setModalMessage(
+            "We're experiencing some issues at the moment. Please try again later."
+          );
+        } else {
+          // Other errors
+          setModalTitle("Oops! Something went wrong");
+          setModalMessage("An unexpected error occurred. Please try again.");
+        }
       } else {
-        setErrorMessage("Oops! Failed to submit RSVP.");
+        // If no response from backend
+        setModalTitle("Error");
+        setModalMessage("Failed to submit RSVP. Please try again later.");
       }
-      setSuccessMessage("");
-      setShowModal(true);
-      console.error("RSVP Error:", error);
     }
+
+    setShowModal(true); // Show modal after handling the response
   };
 
   return (
@@ -312,9 +336,7 @@ const RsvpSection = () => {
           <div className="modal-dialog modal-dialog-centered" role="document">
             <div className="modal-content">
               <div className="modal-header">
-                <h5 className="modal-title">
-                  {successMessage ? "Success" : "Error"}
-                </h5>
+                <h5 className="modal-title">{modalTitle}</h5>
                 <button
                   type="button"
                   className="btn-close"
@@ -322,7 +344,7 @@ const RsvpSection = () => {
                 ></button>
               </div>
               <div className="modal-body">
-                <p className="text-center">{successMessage || errorMessage}</p>
+                <p className="text-center">{modalMessage}</p>
               </div>
               <div className="modal-footer">
                 <button
