@@ -14,9 +14,9 @@ const RsvpSection = () => {
     rsvp_status: "",
   });
 
-  const [modalMessage, setModalMessage] = useState(""); // Modal message state
-  const [modalTitle, setModalTitle] = useState(""); // Modal title state
-  const [showModal, setShowModal] = useState(false); // Modal visibility state
+  const [showModal, setShowModal] = useState(false);
+  const [modalTitle, setModalTitle] = useState("");
+  const [modalMessage, setModalMessage] = useState("");
 
   const handleChange = (e) => {
     const { id, value } = e.target;
@@ -45,12 +45,9 @@ const RsvpSection = () => {
         guestData
       );
 
-      // Handle success response
-      if (res.status === 201 || res.status === 200) {
-        setModalTitle("Success");
-        setModalMessage(
-          "Thank you for your RSVP! 🎉 We look forward to celebrating with you!"
-        );
+      if (res.status === 201) {
+        setModalTitle("Success 🎉");
+        setModalMessage("RSVP submitted successfully!");
         setFormData({
           firstname: "",
           lastname: "",
@@ -59,50 +56,38 @@ const RsvpSection = () => {
           message: "",
           rsvp_status: "",
         });
-      } else {
-        throw new Error("Unexpected response");
       }
     } catch (error) {
-      if (error.response) {
-        const backendMessage = error.response.data.message;
-        const statusCode = error.response.status;
+      const status = error?.response?.status;
+      const backendMessage = error?.response?.data?.message;
 
-        // Handling different status codes
-        if (statusCode === 409) {
-          // Email already used (Conflict)
-          setModalTitle("Oops, an issue occurred");
-          setModalMessage(
-            "It seems that this email address has already been used to RSVP. Please try a different email."
-          );
-        } else if (statusCode === 400) {
-          // Missing fields (Bad Request)
-          setModalTitle("Oops, we need more info");
-          setModalMessage(
-            "Please make sure all required fields (first name, last name, email, and RSVP status) are filled out."
-          );
-        } else if (statusCode === 500) {
-          // Server error (Internal Server Error)
-          setModalTitle("Something went wrong");
-          setModalMessage(
-            "We're experiencing some issues at the moment. Please try again later."
-          );
-        } else {
-          // Other errors
-          setModalTitle("Oops! Something went wrong");
-          setModalMessage("An unexpected error occurred. Please try again.");
-        }
+      if (status === 400) {
+        setModalTitle("Missing Information");
+        setModalMessage(
+          backendMessage || "Please complete all required fields."
+        );
+      } else if (status === 409) {
+        setModalTitle("Duplicate RSVP");
+        setModalMessage(
+          backendMessage || "You have already submitted your RSVP."
+        );
+      } else if (status === 500) {
+        setModalTitle("Server Error");
+        setModalMessage(
+          "Something went wrong on our end. Please try again later."
+        );
       } else {
-        // If no response from backend
         setModalTitle("Error");
-        setModalMessage("Failed to submit RSVP. Please try again later.");
+        setModalMessage("An unexpected error occurred.");
       }
+    } finally {
+      setShowModal(true);
     }
-
-    setShowModal(true); // Show modal after handling the response
   };
 
   return (
     <>
+      {/* Main Form Section */}
       <section
         className="container-fluid position-relative RSVP-form py-5"
         id="weddingRsvp"
@@ -158,7 +143,7 @@ const RsvpSection = () => {
 
                 <form onSubmit={handleSubmit}>
                   <div className="row gx-4 gy-3">
-                    {/* First Name */}
+                    {/* Form Fields */}
                     <div className="col-lg-6">
                       <div className="form-floating mb-2 mt-3">
                         <input
@@ -175,8 +160,6 @@ const RsvpSection = () => {
                         </label>
                       </div>
                     </div>
-
-                    {/* Last Name */}
                     <div className="col-lg-6">
                       <div className="form-floating mb-2 mt-3">
                         <input
@@ -193,8 +176,6 @@ const RsvpSection = () => {
                         </label>
                       </div>
                     </div>
-
-                    {/* Email */}
                     <div className="col-lg-6">
                       <div className="form-floating mb-2 mt-3">
                         <input
@@ -211,8 +192,6 @@ const RsvpSection = () => {
                         </label>
                       </div>
                     </div>
-
-                    {/* Mobile */}
                     <div className="col-lg-6">
                       <div className="form-floating mb-2 mt-3">
                         <input
@@ -229,8 +208,6 @@ const RsvpSection = () => {
                         </label>
                       </div>
                     </div>
-
-                    {/* Message */}
                     <div className="col-12">
                       <div className="form-floating">
                         <textarea
@@ -247,7 +224,7 @@ const RsvpSection = () => {
                       </div>
                     </div>
 
-                    {/* Attendance Radio Buttons */}
+                    {/* Radio Buttons */}
                     <div className="col-12">
                       <div className="text-center border border-success p-4 my-4 position-relative">
                         <div
@@ -330,49 +307,36 @@ const RsvpSection = () => {
         </div>
       </section>
 
-      {/* Modal Section */}
-      {showModal && (
-        <>
-          {/* Backdrop */}
-          <div className="modal-backdrop fade show"></div>
-
-          {/* Modal */}
-          <div
-            className="modal fade show"
-            id="exampleModal"
-            tabIndex="-1"
-            aria-labelledby="exampleModalLabel"
-            aria-hidden="true"
-            role="dialog"
-          >
-            <div className="modal-dialog modal-dialog-centered">
-              <div className="modal-content">
-                <div className="modal-header">
-                  <h1 className="modal-title fs-5" id="exampleModalLabel">
-                    {modalTitle}
-                  </h1>
-                  <button
-                    type="button"
-                    className="btn-close"
-                    aria-label="Close"
-                    onClick={() => setShowModal(false)}
-                  ></button>
-                </div>
-                <div className="modal-body text-center">{modalMessage}</div>
-                <div className="modal-footer">
-                  <button
-                    type="button"
-                    className="btn btn-secondary"
-                    onClick={() => setShowModal(false)}
-                  >
-                    Close
-                  </button>
-                </div>
-              </div>
+      {/* Bootstrap Modal */}
+      <div
+        className={`modal fade ${showModal ? "show d-block" : ""}`}
+        tabIndex="-1"
+      >
+        <div className="modal-dialog modal-dialog-centered">
+          <div className="modal-content">
+            <div className="modal-header">
+              <h5 className="modal-title">{modalTitle}</h5>
+              <button
+                type="button"
+                className="btn-close"
+                onClick={() => setShowModal(false)}
+              ></button>
+            </div>
+            <div className="modal-body">
+              <p>{modalMessage}</p>
+            </div>
+            <div className="modal-footer">
+              <button
+                type="button"
+                className="btn btn-secondary"
+                onClick={() => setShowModal(false)}
+              >
+                Close
+              </button>
             </div>
           </div>
-        </>
-      )}
+        </div>
+      </div>
     </>
   );
 };
