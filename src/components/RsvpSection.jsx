@@ -333,25 +333,32 @@ const RsvpSection = () => {
       {/* Modal Section */}
       {showModal && (
         <>
-          {/* Modal Backdrop */}
-          <div className="modal-backdrop show"></div>
+          {/* Backdrop */}
+          <div className="modal-backdrop fade show"></div>
 
           {/* Modal */}
-          <div className="modal fade show d-block" tabIndex="-1" role="dialog">
-            <div className="modal-dialog modal-dialog-centered" role="document">
+          <div
+            className="modal fade show"
+            id="exampleModal"
+            tabIndex="-1"
+            aria-labelledby="exampleModalLabel"
+            aria-hidden="true"
+            role="dialog"
+          >
+            <div className="modal-dialog modal-dialog-centered">
               <div className="modal-content">
                 <div className="modal-header">
-                  <h5 className="modal-title">{modalTitle}</h5>
+                  <h1 className="modal-title fs-5" id="exampleModalLabel">
+                    {modalTitle}
+                  </h1>
                   <button
                     type="button"
                     className="btn-close"
-                    onClick={() => setShowModal(false)}
                     aria-label="Close"
+                    onClick={() => setShowModal(false)}
                   ></button>
                 </div>
-                <div className="modal-body">
-                  <p className="text-center">{modalMessage}</p>
-                </div>
+                <div className="modal-body text-center">{modalMessage}</div>
                 <div className="modal-footer">
                   <button
                     type="button"
