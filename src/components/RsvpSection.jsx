@@ -45,8 +45,8 @@ const RsvpSection = () => {
         guestData
       );
 
+      // Handle success response
       if (res.status === 201 || res.status === 200) {
-        // Success response
         setModalTitle("Success");
         setModalMessage(
           "Thank you for your RSVP! 🎉 We look forward to celebrating with you!"
