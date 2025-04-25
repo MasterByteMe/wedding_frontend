@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react"; // <-- Import useEffect correctly
+import React, { useState } from "react";
 import axios from "axios";
 
 import flowerLeft from "../assets/images/gold_flower1.png";
@@ -46,7 +46,7 @@ const RsvpSection = () => {
 
       if (res.status === 201 || res.status === 200) {
         setSuccessMessage("RSVP submitted successfully! 🎉");
-        setErrorMessage(""); // clear any previous error messages
+        setErrorMessage("");
         setFormData({
           firstname: "",
           lastname: "",
@@ -55,32 +55,15 @@ const RsvpSection = () => {
           message: "",
           rsvp_status: "",
         });
+      } else {
+        throw new Error("Submission failed");
       }
     } catch (error) {
-      if (error.response && error.response.status === 409) {
-        // Duplicate email case
-        setErrorMessage("This email has already been used to RSVP.");
-      } else if (error.response && error.response.data?.message) {
-        // Backend sent a specific message
-        setErrorMessage(error.response.data.message);
-      } else {
-        // General fallback
-        setErrorMessage("Oops! Failed to submit RSVP.");
-      }
-
-      setSuccessMessage(""); // clear any previous success messages
+      setErrorMessage("Oops! Failed to submit RSVP.");
+      setSuccessMessage("");
       console.error("RSVP Error:", error);
     }
   };
-
-  useEffect(() => {
-    if (successMessage || errorMessage) {
-      const modal = new window.bootstrap.Modal(
-        document.getElementById("messageModal")
-      );
-      modal.show(); // Show modal on successful submission or error
-    }
-  }, [successMessage, errorMessage]);
 
   return (
     <section
@@ -122,6 +105,20 @@ const RsvpSection = () => {
               className="p-5 border-success position-relative"
               style={{ borderStyle: "double" }}
             >
+              <div
+                className="fw-bold text-subheader bg-white d-flex align-items-center justify-content-center position-absolute border-success p-2"
+                style={{
+                  width: "75%",
+                  borderStyle: "double",
+                  top: 0,
+                  left: "50%",
+                  transform: "translate(-50%, -50%)",
+                }}
+              >
+                Kindly respond before 20th of April, we look forward to
+                celebrating with you!
+              </div>
+
               <form onSubmit={handleSubmit}>
                 <div className="row gx-4 gy-3">
                   {/* First Name */}
@@ -278,6 +275,18 @@ const RsvpSection = () => {
                     </div>
                   </div>
 
+                  {/* Success/Error Messages */}
+                  {successMessage && (
+                    <div className="alert alert-success text-center">
+                      {successMessage}
+                    </div>
+                  )}
+                  {errorMessage && (
+                    <div className="alert alert-danger text-center">
+                      {errorMessage}
+                    </div>
+                  )}
+
                   {/* Submit Button */}
                   <div className="col-12 text-center">
                     <button
@@ -289,41 +298,6 @@ const RsvpSection = () => {
                   </div>
                 </div>
               </form>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      {/* Modal for displaying messages */}
-      <div
-        className="modal fade"
-        id="messageModal"
-        tabIndex="-1"
-        aria-labelledby="messageModalLabel"
-        aria-hidden="true"
-      >
-        <div className="modal-dialog">
-          <div className="modal-content">
-            <div className="modal-header">
-              <h5 className="modal-title" id="messageModalLabel">
-                {successMessage ? "Success!" : "Oops!"}
-              </h5>
-              <button
-                type="button"
-                className="btn-close"
-                data-bs-dismiss="modal"
-                aria-label="Close"
-              ></button>
-            </div>
-            <div className="modal-body">{successMessage || errorMessage}</div>
-            <div className="modal-footer">
-              <button
-                type="button"
-                className="btn btn-secondary"
-                data-bs-dismiss="modal"
-              >
-                Close
-              </button>
             </div>
           </div>
         </div>
