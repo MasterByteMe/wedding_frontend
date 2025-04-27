@@ -16,6 +16,7 @@ const RsvpSection = () => {
 
   const [successMessage, setSuccessMessage] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
+  const [isSubmitting, setIsSubmitting] = useState(false); // Prevent multiple submissions
 
   const handleChange = (e) => {
     const { id, value } = e.target;
@@ -29,11 +30,18 @@ const RsvpSection = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
+    if (isSubmitting) return; // Prevent form submission if already submitting
+
+    setIsSubmitting(true); // Set submitting state to true
+
     try {
+      // ✨ Normalize email
+      const normalizedEmail = formData.email.trim().toLowerCase();
+
       const guestData = {
         firstname: formData.firstname,
         lastname: formData.lastname,
-        email: formData.email,
+        email: normalizedEmail,
         mobile: formData.mobile,
         message: formData.message,
         rsvp_status: formData.rsvp_status,
@@ -48,7 +56,7 @@ const RsvpSection = () => {
         setSuccessMessage(
           "🎉 RSVP submitted successfully! We look forward to seeing you."
         );
-        setErrorMessage("");
+        setErrorMessage(""); // Clear any previous error message
         setFormData({
           firstname: "",
           lastname: "",
@@ -56,7 +64,7 @@ const RsvpSection = () => {
           mobile: "",
           message: "",
           rsvp_status: "",
-        });
+        }); // Reset form after successful submission
       }
     } catch (error) {
       const status = error?.response?.status;
@@ -70,7 +78,9 @@ const RsvpSection = () => {
       } else {
         setErrorMessage("Unexpected error occurred.");
       }
-      setSuccessMessage("");
+      setSuccessMessage(""); // Clear any previous success message
+    } finally {
+      setIsSubmitting(false); // Reset submitting state
     }
   };
 
@@ -301,8 +311,9 @@ const RsvpSection = () => {
                     <button
                       type="submit"
                       className="btn btn-outline-warning text-dark py-3 px-5"
+                      disabled={isSubmitting} // Disable button while submitting
                     >
-                      Submit Now
+                      {isSubmitting ? "Submitting..." : "Submit Now"}
                     </button>
                   </div>
                 </div>
